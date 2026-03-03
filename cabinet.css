@@ -1,0 +1,117 @@
+html, body {
+  zoom: 1.04;
+  width: 100%;
+  margin: 0;
+  color: #1f3d2b;
+  background-image: url(phssitebg.png);
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+section {
+  margin: 20px auto;
+  width: 740px;
+  background-color: #f2eadb;
+  background-image:  repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.045),
+      rgba(0,0,0,0.045) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.045),
+      rgba(0,0,0,0.045) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0,0,0,0.02),
+      rgba(0,0,0,0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  border: 1px solid rgb(0, 87, 25);
+  padding: 12px 16px;
+   box-shadow:
+    -3px 3px 0 rgb(0, 87, 25),
+    -6px 6px 0 rgba(0, 87, 25, 0.35);
+    outline: 1px solid #caa72a;
+  outline-offset: -4px;
+}
+
+footer {
+  margin-top: 64px;
+  font-size: 0.85rem;
+  color: #f2eadb;
+  text-align: center;
+  text-shadow: -1px -1px 0 rgb(44, 44, 44), 1px -1px 0 rgb(44, 44, 44), -1px 1px 0 rgb(44, 44, 44), 1px 1px 0 rgb(44, 44, 44)
+}
+
+h1 {
+  margin: 6px 0 4px;
+  font-size: 2.8rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin: 8px 0;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+section.primary {
+  border-width: 2px;
+}
+
+section.secondary {
+  border-style: dashed;
+}
+
+.small {
+  font-size: 0.85rem;
+  color: #4a6b57;
+}
+
+mark {
+  background: #d8b23a;
+  color: #1f3d2b;
+  padding: 0 4px;
+}
+
+.divider {
+  height: 2px;
+  background: #caa72a;
+  margin: 8px 0;
+}
+
+a {
+  color: #2f6f4f;
+  text-decoration: none;
+  border-bottom: 1px dashed #2f6f4f;
+}
+
+a:hover {
+  color: #caa72a;
+  border-bottom-color: #caa72a;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: #d8b23a;
+  margin: 40px 0;
+}
+
+.note {
+  position: left;
+  left: -140px;
+  top: 24px;
+  width: 120px;
+  font-size: 0.8rem;
+  color: #4a6b57;
+}
