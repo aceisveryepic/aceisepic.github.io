@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+
+    body {
+      margin: 0;
+      /* your page background — swap with your plaid/pattern image */
+      background-color: #2a3a2a;
+      background-image: url('your-background-pattern.jpg');
+      background-size: cover;
+    }
+
+    /* ── FULL-WIDTH BANNER ──────────────────────────────────────
+       Not fixed — sits at the top of the page and scrolls away.
+       Replace the gradient with background-image: url('banner.jpg')
+    ────────────────────────────────────────────────────────── */
+    .site-banner {
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(135deg, #6b0000, #cc1a00, #8b0000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Logo sits centred over the gradient.
+       A transparent-background PNG will show the gradient through it. */
+    .site-banner img {
+      height: 90px;   /* adjust to taste */
+      width: auto;
+    }
+
+    /* ── CONTENT COLUMN ─────────────────────────────────────────
+       This wrapper controls the width of your beige body area
+       AND the nav bar — both share the same max-width and margin.
+    ────────────────────────────────────────────────────────── */
+    .content-column {
+      max-width: 840px;   /* match this to your beige box width */
+      margin: 0 auto;
+    }
+
+    /* ── NAV BAR ────────────────────────────────────────────────
+       Same width as the content column (inherits it from parent).
+       Not fixed — scrolls with the page.
+    ────────────────────────────────────────────────────────── */
+    .site-nav {
+      width: 100%;
+      height: 44px;
+      background: #222;
+      border-bottom: 2px solid #cc1a00;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .site-nav ul {
+      display: flex;
+      align-items: stretch;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .site-nav ul > li {
+      position: relative;
+    }
+
+    .site-nav ul > li > a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 18px;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .site-nav ul > li > a:hover,
+    .site-nav ul > li:hover > a {
+      background: #111;
+      color: #ff4444;
+    }
+
+    /* ── DROPDOWN MENU ──────────────────────────────────────── */
+    .site-nav ul > li > ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-top: 2px solid #cc1a00;
+      list-style: none;
+      padding: 6px 0;
+      z-index: 100;
+    }
+
+    .site-nav ul > li:hover > ul {
+      display: block;
+    }
+
+    .site-nav ul > li > ul li a {
+      display: block;
+      padding: 10px 20px;
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.78rem;
+    }
+
+    .site-nav ul > li > ul li a:hover {
+      background: #2d2d2d;
+      color: #ff4444;
+    }
+
+    .site-nav ul > li > ul li + li {
+      border-top: 1px solid #333;
+    }
+
+    /* ── BEIGE CONTENT BOX ──────────────────────────────────────
+       Your main page body. Sits below the nav inside .content-column.
+    ────────────────────────────────────────────────────────── */
+    .page-body {
+      background: #e8e0c8;   /* beige — tweak to match yours */
+      border: 2px dashed #4a7a4a;
+      padding: 24px;
+      margin-top: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Full-width banner, no fixed positioning -->
+  <div class="site-banner">
+    <img src="your-logo.png" alt="Your Site Name"/>
+    <!-- If you don't have a logo image yet, replace the <img> with:
+         <span style="color:#fff; font-size:2rem; font-weight:900;">Your Site</span> -->
+  </div>
+
+  <!-- Nav + content share the same centred column -->
+  <div class="content-column">
+
+    <nav class="site-nav">
+      <ul>
+
+        <li>
+          <a href="#">Home</a>
+          <ul>
+            <li><a href="#">Feature Stories</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li><a href="#">Most Viewed Articles</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Drummers</a>
+          <ul>
+            <li><a href="#">Artist Profiles</a></li>
+            <li><a href="#">Interviews</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#">MD Festival</a></li>
+
+        <li>
+          <a href="#">Education</a>
+          <ul>
+            <li><a href="#">Lessons</a></li>
+            <li><a href="#">Technique Videos</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+
+    <!-- Your beige content box -->
+    <div class="page-body">
+      <p>Your page content goes here.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

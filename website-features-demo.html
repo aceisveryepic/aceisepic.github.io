@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Drummer – Feature Demo</title>
+  <style>
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      background-image:
+        radial-gradient(circle, #2a2a2a 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: #e0e0e0;
+      /* Push page content below both the fixed top-border AND the nav bar */
+      padding-top: 170px;
+    }
+
+    /* ============================================================
+       FEATURE 1 — FIXED TOP BORDER
+       -------------------------------------------------------
+       This is a <header> element with position: fixed and a high
+       z-index so it always sits above the scrolling page content.
+       It contains a background image (or a red gradient to simulate
+       the "red textured banner" from Modern Drummer).
+       ============================================================ */
+    .site-top-border {
+      position: fixed;          /* stays at top even when page scrolls  */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 110px;            /* tall enough to show the banner art    */
+      z-index: 1000;            /* above everything else on the page     */
+
+      /* Red gradient that mimics the textured red banner.
+         Replace the gradient with: background-image: url('your-header.jpg');
+         background-size: cover; background-position: center;              */
+      background: linear-gradient(
+        135deg,
+        #6b0000 0%,
+        #a80000 30%,
+        #cc1a00 55%,
+        #8b0000 80%,
+        #3d0000 100%
+      );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* The logo / magazine title sits inside the fixed border */
+    .site-top-border .logo {
+      text-align: center;
+    }
+    .site-top-border .logo span.main {
+      display: block;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #fff;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+    .site-top-border .logo span.main em {
+      color: #ff4444;
+      font-style: normal;
+    }
+    .site-top-border .logo span.tagline {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 6px;
+      color: #ccc;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+
+    /* ============================================================
+       FEATURE 2 — DROPDOWN NAVIGATION
+       -------------------------------------------------------
+       The nav sits directly below the fixed top border (top: 110px).
+       Each nav item with children gets a .dropdown class.
+       The child <ul class="dropdown-menu"> is hidden by default and
+       revealed on hover via CSS :hover (no JS needed for basic use).
+       ============================================================ */
+    .site-nav {
+      position: fixed;          /* also fixed so it scrolls with border  */
+      top: 110px;               /* flush beneath the top border          */
+      left: 0;
+      width: 100%;
+      height: 44px;
+      background-color: #222222;
+      border-top: 1px solid #444;
+      border-bottom: 2px solid #cc1a00; /* red accent line at the bottom */
+      z-index: 999;             /* just below the top border             */
+      display: flex;
+      align-items: stretch;
+    }
+
+    /* Inner container to centre the nav links */
+    .site-nav ul.nav-list {
+      display: flex;
+      align-items: stretch;
+      list-style: none;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* Each top-level nav item */
+    .site-nav ul.nav-list > li {
+      position: relative; /* needed so dropdown positions correctly below */
+    }
+
+    .site-nav ul.nav-list > li > a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 18px;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+    /* Hover highlight on top-level items */
+    .site-nav ul.nav-list > li > a:hover,
+    .site-nav ul.nav-list > li:hover > a {
+      background-color: #111;
+      color: #ff4444;
+    }
+
+    /* Arrow indicator for items that have a dropdown */
+    .site-nav ul.nav-list > li.has-dropdown > a::after {
+      content: " ▾";
+      font-size: 0.6rem;
+      margin-left: 4px;
+      opacity: 0.7;
+    }
+
+    /* ── DROPDOWN MENU ────────────────────────────────────────── */
+    .site-nav ul.nav-list > li > ul.dropdown-menu {
+      /* Hidden by default; shown on :hover of the parent <li>   */
+      display: none;
+
+      position: absolute;       /* positioned relative to the parent li  */
+      top: 100%;                /* flush below the nav bar               */
+      left: 0;
+
+      min-width: 200px;
+      background-color: #1e1e1e;
+      border: 1px solid #444;
+      border-top: 2px solid #cc1a00;
+      list-style: none;
+      padding: 6px 0;
+
+      /* subtle animation using max-height trick */
+      overflow: hidden;
+      z-index: 1100;
+    }
+
+    /* Show the dropdown when the parent <li> is hovered */
+    .site-nav ul.nav-list > li:hover > ul.dropdown-menu {
+      display: block;
+    }
+
+    /* Dropdown item links */
+    .site-nav ul.nav-list > li > ul.dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: #cccccc;
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.5px;
+      text-transform: capitalize;
+      transition: background 0.12s, color 0.12s;
+    }
+    .site-nav ul.nav-list > li > ul.dropdown-menu li a:hover {
+      background-color: #2d2d2d;
+      color: #ff4444;
+    }
+    /* Thin separator lines between dropdown items */
+    .site-nav ul.nav-list > li > ul.dropdown-menu li + li {
+      border-top: 1px solid #333;
+    }
+
+
+    /* ============================================================
+       FEATURE 3 — AUTO-SCROLLING SLIDESHOW
+       -------------------------------------------------------
+       The slideshow is a <div> that shows one slide at a time.
+       JavaScript handles:
+         - auto-advancing every 4 seconds
+         - prev/next arrow buttons
+         - dot indicators synced to the current slide
+         - pausing on hover (optional)
+       ============================================================ */
+
+    /* Outer container — controls visible area */
+    .slideshow-wrapper {
+      position: relative;       /* so arrows/dots can position inside    */
+      width: 100%;
+      max-width: 860px;
+      margin: 30px auto;
+      overflow: hidden;
+      border: 2px solid #444;
+      background: #000;
+    }
+
+    /* The track holds all slides side-by-side */
+    .slide-track {
+      display: flex;
+      transition: transform 0.55s ease; /* smooth left-scroll animation  */
+      will-change: transform;
+    }
+
+    /* Each slide */
+    .slide {
+      min-width: 100%;          /* each slide fills the wrapper exactly  */
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+    }
+
+    /* Slide background (replace with real images) */
+    .slide:nth-child(1) { background: linear-gradient(160deg,#1a0000,#5a0000); }
+    .slide:nth-child(2) { background: linear-gradient(160deg,#001a10,#004d30); }
+    .slide:nth-child(3) { background: linear-gradient(160deg,#00071a,#003080); }
+    .slide:nth-child(4) { background: linear-gradient(160deg,#1a1a00,#4d4d00); }
+    .slide:nth-child(5) { background: linear-gradient(160deg,#1a000d,#5a0033); }
+
+    /* Text overlay sitting over each slide */
+    .slide-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 18px 28px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.82));
+    }
+    .slide-caption h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
+      line-height: 1.1;
+    }
+    .slide-caption p {
+      color: #ccc;
+      font-size: 0.85rem;
+      margin-top: 5px;
+    }
+
+    /* Large decorative image within slide (centred) */
+    .slide-img-placeholder {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      opacity: 0.18;
+    }
+
+    /* ── PREV / NEXT ARROW BUTTONS ───────────────────────────── */
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.55);
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .slide-btn:hover { background: rgba(204,26,0,0.75); }
+    .slide-btn.prev { left: 12px; }
+    .slide-btn.next { right: 12px; }
+
+    /* ── DOT INDICATORS ──────────────────────────────────────── */
+    .slide-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .dot.active {
+      background: #cc1a00;
+      transform: scale(1.25);
+    }
+
+
+    /* ============================================================
+       PAGE BODY CONTENT (below slideshow)
+    ============================================================ */
+    .page-body {
+      max-width: 860px;
+      margin: 0 auto 60px;
+      padding: 0 16px;
+    }
+    .section-title {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #cc1a00;
+      border-bottom: 1px solid #333;
+      padding-bottom: 6px;
+      margin: 30px 0 16px;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: #252525;
+      border: 1px solid #3a3a3a;
+      border-radius: 4px;
+      padding: 14px;
+    }
+    .card h3 { font-size: 0.85rem; color: #eee; margin-bottom: 6px; }
+    .card p  { font-size: 0.75rem; color: #888; line-height: 1.5; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       FEATURE 1: FIXED TOP BORDER
+       This <header> is position:fixed so it never moves.
+       The page body has padding-top to prevent content hiding behind it.
+  ============================================================ -->
+  <header class="site-top-border" aria-label="Site header">
+    <div class="logo">
+      <span class="main">AceIs<em>Epic</em></span>
+      <span class="tagline">The World's #1 Drum Magazine</span>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       FEATURE 2: DROPDOWN NAV
+       position:fixed, top:110px (right below the top border).
+       Dropdown menus appear on CSS :hover — no JS needed.
+       Add class "has-dropdown" to any <li> that should show a caret.
+  ============================================================ -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <ul class="nav-list" role="menubar">
+
+      <li class="has-dropdown" role="none">
+        <a href="#" role="menuitem" aria-haspopup="true">Home ▾</a>
+        <ul class="dropdown-menu" role="menu" aria-label="Home submenu">
+          <li role="none"><a href="#" role="menuitem">Feature Stories</a></li>
+          <li role="none"><a href="#" role="menuitem">Reviews</a></li>
+          <li role="none"><a href="#" role="menuitem">Most Viewed Articles</a></li>
+        </ul>
+      </li>
+
+      <li class="has-dropdown" role="none">
+        <a href="#" role="menuitem" aria-haspopup="true">Drummers ▾</a>
+        <ul class="dropdown-menu" role="menu" aria-label="Drummers submenu">
+          <li role="none"><a href="#" role="menuitem">Artist Profiles</a></li>
+          <li role="none"><a href="#" role="menuitem">Interviews</a></li>
+          <li role="none"><a href="#" role="menuitem">Drum Stars</a></li>
+        </ul>
+      </li>
+
+      <li class="has-dropdown" role="none">
+        <a href="#" role="menuitem" aria-haspopup="true">News &amp; Events ▾</a>
+        <ul class="dropdown-menu" role="menu" aria-label="News submenu">
+          <li role="none"><a href="#" role="menuitem">Latest News</a></li>
+          <li role="none"><a href="#" role="menuitem">Upcoming Shows</a></li>
+          <li role="none"><a href="#" role="menuitem">NAMM Coverage</a></li>
+        </ul>
+      </li>
+
+      <li role="none"><a href="#" role="menuitem">MD Festival</a></li>
+
+      <li class="has-dropdown" role="none">
+        <a href="#" role="menuitem" aria-haspopup="true">Education ▾</a>
+        <ul class="dropdown-menu" role="menu" aria-label="Education submenu">
+          <li role="none"><a href="#" role="menuitem">Lessons</a></li>
+          <li role="none"><a href="#" role="menuitem">Technique Videos</a></li>
+          <li role="none"><a href="#" role="menuitem">Study Guides</a></li>
+        </ul>
+      </li>
+
+      <li class="has-dropdown" role="none">
+        <a href="#" role="menuitem" aria-haspopup="true">Multimedia ▾</a>
+        <ul class="dropdown-menu" role="menu" aria-label="Multimedia submenu">
+          <li role="none"><a href="#" role="menuitem">Videos</a></li>
+          <li role="none"><a href="#" role="menuitem">Podcasts</a></li>
+          <li role="none"><a href="#" role="menuitem">Photo Galleries</a></li>
+        </ul>
+      </li>
+
+      <li role="none"><a href="#" role="menuitem">Shop</a></li>
+      <li role="none"><a href="#" role="menuitem">Contact</a></li>
+
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       FEATURE 3: AUTO-SCROLLING SLIDESHOW
+       - .slide-track holds all slides side by side
+       - JS shifts the track's translateX to reveal each slide
+       - Auto-advances every 4s; pauses on mouseenter
+  ============================================================ -->
+  <div class="slideshow-wrapper" id="slideshow" aria-label="Featured articles slideshow">
+
+    <!-- Left arrow -->
+    <button class="slide-btn prev" id="prevBtn" aria-label="Previous slide">&#8249;</button>
+
+    <!-- All slides in a flex row -->
+    <div class="slide-track" id="slideTrack">
+
+      <div class="slide" role="group" aria-label="Slide 1 of 5">
+        <div class="slide-img-placeholder">🥁</div>
+        <div class="slide-caption">
+          <h2>Photos from NAMM 2013</h2>
+          <p>All the highlights from the Anaheim Convention Center</p>
+        </div>
+      </div>
+
+      <div class="slide" role="group" aria-label="Slide 2 of 5">
+        <div class="slide-img-placeholder">🎵</div>
+        <div class="slide-caption">
+          <h2>Mind Matters</h2>
+          <p>Overcoming common mental barriers in drumming</p>
+        </div>
+      </div>
+
+      <div class="slide" role="group" aria-label="Slide 3 of 5">
+        <div class="slide-img-placeholder">🎼</div>
+        <div class="slide-caption">
+          <h2>Stick Technique</h2>
+          <p>The essential guide for the modern drummer</p>
+        </div>
+      </div>
+
+      <div class="slide" role="group" aria-label="Slide 4 of 5">
+        <div class="slide-img-placeholder">🎤</div>
+        <div class="slide-caption">
+          <h2>Exclusive Interview</h2>
+          <p>Behind the kit with this month's cover artist</p>
+        </div>
+      </div>
+
+      <div class="slide" role="group" aria-label="Slide 5 of 5">
+        <div class="slide-img-placeholder">🏆</div>
+        <div class="slide-caption">
+          <h2>Readers Poll Results</h2>
+          <p>Your votes are in — see who took the top spots</p>
+        </div>
+      </div>
+
+    </div><!-- /.slide-track -->
+
+    <!-- Right arrow -->
+    <button class="slide-btn next" id="nextBtn" aria-label="Next slide">&#8250;</button>
+
+    <!-- Dot indicators — generated by JS below -->
+    <div class="slide-dots" id="slideDots" aria-label="Slide indicators"></div>
+
+  </div><!-- /.slideshow-wrapper -->
+
+
+  <!-- Dummy page content to demonstrate scrolling -->
+  <div class="page-body">
+    <p class="section-title">Latest News</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Jason Rullo Released From Hospital</h3>
+        <p>Symphony X drummer recovers after health scare. · Feb 28, 2013</p>
+      </div>
+      <div class="card">
+        <h3>Vinnie Colaiuta on Formula 602</h3>
+        <p>Paiste artist discusses the Essential Series. · Feb 27, 2013</p>
+      </div>
+      <div class="card">
+        <h3>Dino Danelli on Broadway</h3>
+        <p>Rascals drummer brings the beat to the stage. · Feb 26, 2013</p>
+      </div>
+      <div class="card">
+        <h3>Sessions Business Clinic</h3>
+        <p>Lone Star Percussion hosts free seminar. · Mar 2, 2013</p>
+      </div>
+    </div>
+
+    <p class="section-title">Reviews</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Metal Drumming Concepts</h3>
+        <p>Andols Herrick covers heavy-music techniques. · Feb 15, 2013</p>
+      </div>
+      <div class="card">
+        <h3>New Cymbal Series</h3>
+        <p>We test the latest offerings from Zildjian. · Feb 10, 2013</p>
+      </div>
+      <div class="card">
+        <h3>Practice Pad Roundup</h3>
+        <p>Which pad is right for your practice routine? · Feb 5, 2013</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       JAVASCRIPT — SLIDESHOW LOGIC
+       Everything here is self-contained and commented.
+  ============================================================ -->
+  <script>
+    (function () {
+
+      /* ── SETUP ─────────────────────────────────────────────── */
+      const track     = document.getElementById('slideTrack');
+      const wrapper   = document.getElementById('slideshow');
+      const dotsEl    = document.getElementById('slideDots');
+      const prevBtn   = document.getElementById('prevBtn');
+      const nextBtn   = document.getElementById('nextBtn');
+
+      const slides    = track.querySelectorAll('.slide');
+      const total     = slides.length;
+      let   current   = 0;          // index of currently visible slide
+      let   autoTimer = null;
+      const DELAY     = 4000;       // ms between automatic advances
+
+      /* ── BUILD DOT INDICATORS ─────────────────────────────── */
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(dot);
+      });
+
+      function getDots() { return dotsEl.querySelectorAll('.dot'); }
+
+      /* ── MOVE TO SLIDE N ──────────────────────────────────── */
+      function goTo(n) {
+        // Wrap around at ends
+        current = (n + total) % total;
+
+        // Shift the track: moving it left by (current × 100%) reveals
+        // the correct slide (all slides sit in a horizontal row)
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+
+        // Sync dots
+        getDots().forEach((d, i) => {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      /* ── PREVIOUS / NEXT BUTTONS ──────────────────────────── */
+      prevBtn.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+      nextBtn.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+
+      /* ── AUTO-ADVANCE ─────────────────────────────────────── */
+      function startTimer() {
+        autoTimer = setInterval(() => goTo(current + 1), DELAY);
+      }
+
+      function stopTimer() {
+        clearInterval(autoTimer);
+      }
+
+      function resetTimer() {
+        stopTimer();
+        startTimer();
+      }
+
+      // Pause on hover (optional quality-of-life feature)
+      wrapper.addEventListener('mouseenter', stopTimer);
+      wrapper.addEventListener('mouseleave', startTimer);
+
+      // Kick off!
+      startTimer();
+
+    })();
+  </script>
+
+</body>
+</html>

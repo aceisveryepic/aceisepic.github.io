@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+
+    /* ── OUTER WRAPPER — clips overflow so only one slide shows ── */
+    .slideshow {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* ── TRACK — all slides sit side-by-side in a flex row ── */
+    .slide-track {
+      display: flex;
+      transition: transform 0.55s ease;
+    }
+
+    /* ── EACH SLIDE ── */
+    .slide {
+      min-width: 100%; /* forces each slide to fill the wrapper */
+      height: 320px;
+      background: #111; /* replace with your background-image */
+      position: relative;
+    }
+
+    /* ── TEXT OVERLAY ── */
+    .slide-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 16px 24px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: #fff;
+    }
+
+    .slide-caption h2 { font-size: 2rem; text-transform: uppercase; }
+    .slide-caption p  { font-size: 0.85rem; color: #ccc; margin-top: 4px; }
+
+    /* ── PREV / NEXT ARROWS ── */
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .slide-btn:hover { background: rgba(180,0,0,0.7); }
+    .slide-btn.prev { left: 12px; }
+    .slide-btn.next { right: 12px; }
+
+    /* ── DOT INDICATORS ── */
+    .slide-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.6);
+      cursor: pointer;
+    }
+    .dot.active {
+      background: #cc1a00;
+      transform: scale(1.25);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="slideshow" id="slideshow">
+
+    <button class="slide-btn prev" id="prevBtn">&#8249;</button>
+
+    <div class="slide-track" id="slideTrack">
+      <div class="slide">
+        <div class="slide-caption">
+          <h2>Photos from NAMM 2013</h2>
+          <p>All the highlights from Anaheim</p>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-caption">
+          <h2>Mind Matters</h2>
+          <p>Overcoming mental barriers in drumming</p>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-caption">
+          <h2>Stick Technique</h2>
+          <p>The essential guide for the modern drummer</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="slide-btn next" id="nextBtn">&#8250;</button>
+    <div class="slide-dots" id="slideDots"></div>
+
+  </div>
+
+  <script>
+    const track   = document.getElementById('slideTrack');
+    const dotsEl  = document.getElementById('slideDots');
+    const slides  = track.querySelectorAll('.slide');
+    const total   = slides.length;
+    let current   = 0;
+    let timer;
+
+    // Build dots
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => { goTo(i); reset(); });
+      dotsEl.appendChild(d);
+    });
+
+    function goTo(n) {
+      current = (n + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dotsEl.querySelectorAll('.dot').forEach((d, i) =>
+        d.classList.toggle('active', i === current)
+      );
+    }
+
+    document.getElementById('prevBtn').onclick = () => { goTo(current - 1); reset(); };
+    document.getElementById('nextBtn').onclick = () => { goTo(current + 1); reset(); };
+
+    // Auto-advance
+    const start = () => { timer = setInterval(() => goTo(current + 1), 4000); };
+    const stop  = () => clearInterval(timer);
+    const reset = () => { stop(); start(); };
+
+    // Pause on hover
+    document.getElementById('slideshow').addEventListener('mouseenter', stop);
+    document.getElementById('slideshow').addEventListener('mouseleave', start);
+
+    start();
+  </script>
+
+</body>
+</html>

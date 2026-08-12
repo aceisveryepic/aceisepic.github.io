@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+
+    body {
+      padding-top: 154px; /* must equal header height + nav height */
+      margin: 0;
+    }
+
+    /* ── FIXED TOP BANNER ── */
+    .site-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 110px;
+      z-index: 1000;
+      background-image: url('your-banner.jpg'); /* swap in your image */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── FIXED NAV BAR ── */
+    .site-nav {
+      position: fixed;
+      top: 110px; /* flush below the banner */
+      left: 0;
+      width: 100%;
+      height: 44px;
+      background: #222;
+      border-bottom: 2px solid #cc1a00;
+      z-index: 999;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .site-nav ul {
+      display: flex;
+      align-items: stretch;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .site-nav ul > li {
+      position: relative; /* anchor for the dropdown */
+    }
+
+    .site-nav ul > li > a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 18px;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .site-nav ul > li > a:hover,
+    .site-nav ul > li:hover > a {
+      background: #111;
+      color: #ff4444;
+    }
+
+    /* ── DROPDOWN MENU ── */
+    .site-nav ul > li > ul {
+      display: none; /* hidden until parent is hovered */
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-top: 2px solid #cc1a00;
+      list-style: none;
+      padding: 6px 0;
+      z-index: 1100;
+    }
+
+    .site-nav ul > li:hover > ul {
+      display: block; /* reveal on hover — no JS needed */
+    }
+
+    .site-nav ul > li > ul li a {
+      display: block;
+      padding: 10px 20px;
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.78rem;
+    }
+
+    .site-nav ul > li > ul li a:hover {
+      background: #2d2d2d;
+      color: #ff4444;
+    }
+
+    .site-nav ul > li > ul li + li {
+      border-top: 1px solid #333;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header class="site-banner">
+    <!-- Your logo / image content goes here -->
+  </header>
+
+  <nav class="site-nav">
+    <ul>
+
+      <li>
+        <a href="#">Home▾</a>
+        <ul>
+          <li><a href="#">Feature Stories</a></li>
+          <li><a href="#">Reviews</a></li>
+          <li><a href="#">Most Viewed Articles</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#">Drummers</a>
+        <ul>
+          <li><a href="#">Artist Profiles</a></li>
+          <li><a href="#">Interviews</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#">MD Festival</a></li>
+
+      <li>
+        <a href="#">Education</a>
+        <ul>
+          <li><a href="#">Lessons</a></li>
+          <li><a href="#">Technique Videos</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </nav>
+
+  <!-- Your page content here -->
+
+</body>
+</html>

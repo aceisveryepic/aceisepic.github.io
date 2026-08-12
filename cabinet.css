@@ -3,7 +3,7 @@ html, body {
   width: 100%;
   margin: 0;
   color: #1f3d2b;
-  background-image: url(phssitebg.png);
+  background-image: url(indexbg.jpg);
   font-family: Verdana, Arial, Helvetica, sans-serif;
   text-align: center;
   overflow-x: hidden;
@@ -36,17 +36,19 @@ section {
       transparent 1px,
       transparent 4px
     );
-  border: 1px solid rgb(0, 87, 25);
+  border: 1px solid #005719;
   padding: 12px 16px;
    box-shadow:
     -3px 3px 0 rgb(0, 87, 25),
     -6px 6px 0 rgba(0, 87, 25, 0.35);
-    outline: 1px solid #caa72a;
+    outline: 1px solid #7f817c;
   outline-offset: -4px;
   position: relative;
   border-style: dashed;
   z-index: 1;
 }
+
+
 
 
 
@@ -87,6 +89,8 @@ h2 {
 
 section.primary {
   border-style: dashed;
+  margin-top: 0;
+  border-top: none;
 }
 
 section.secondary {
@@ -99,14 +103,14 @@ section.secondary {
 }
 
 mark {
-  background: #d8b23a;
+  background: #eceeeb;
   color: #1f3d2b;
   padding: 0 4px;
 }
 
 .divider {
   height: 2px;
-  background: #caa72a;
+  background: #eceeeb;
   margin: 8px 0;
 }
 
@@ -117,14 +121,14 @@ a {
 }
 
 a:hover {
-  color: #caa72a;
-  border-bottom-color: #caa72a;
+  color: #666863;
+  border-bottom-color: #666863;
 }
 
 hr {
   border: none;
   height: 2px;
-  background-color: #d8b23a;
+  background-color: #2b602a;
   margin: 8px 0;
 }
 
@@ -209,3 +213,120 @@ section {
 .photo-grid img:nth-child(even){
   transform: rotate(1deg);
 }
+
+
+
+.site-banner {
+      width: 100%;
+      height: 120px;
+      background: #313131;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: solid;
+      border-color: white;
+      border-width: 3px;
+    }
+
+    /* Logo sits centred over the gradient.
+       A transparent-background PNG will show the gradient through it. */
+    .site-banner img {
+      height: 90px;   /* adjust to taste */
+      width: auto;
+    }
+
+    /* ── CONTENT COLUMN ─────────────────────────────────────────
+       This wrapper controls the width of your beige body area
+       AND the nav bar — both share the same max-width and margin.
+    ────────────────────────────────────────────────────────── */
+    .content-column {
+      max-width: 840px;   /* match this to your beige box width */
+      margin: 0 auto;
+    }
+
+    /* ── NAV BAR ────────────────────────────────────────────────
+       Same width as the content column (inherits it from parent).
+       Not fixed — scrolls with the page.
+    ────────────────────────────────────────────────────────── */
+    .site-nav {
+      max-width: 780px;
+      height: 44px;
+      background: #222;
+      border-bottom: 2px solid #f2eadb;
+      display: flex;
+      align-items: stretch;
+      margin: 0 auto;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .site-nav ul {
+      display: flex;
+      align-items: stretch;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .site-nav ul > li {
+      position: relative;
+    }
+
+    .site-nav a {
+  border-bottom: none;
+}
+
+    .site-nav ul > li > a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 18px;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .site-nav ul > li > a:hover,
+    .site-nav ul > li:hover > a {
+      background: #111;
+      color: #005719;
+    }
+
+    /* ── DROPDOWN MENU ──────────────────────────────────────── */
+    .site-nav ul > li > ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-top: 2px solid #005719;
+      list-style: none;
+      padding: 6px 0;
+      z-index: 100;
+    }
+
+    .site-nav ul > li:hover > ul {
+      display: block;
+    }
+
+    .site-nav ul > li > ul li a {
+      display: block;
+      padding: 10px 20px;
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.78rem;
+    }
+
+    .site-nav ul > li > ul li a:hover {
+      background: #2d2d2d;
+      color: #005719;
+    }
+
+    .site-nav ul > li > ul li + li {
+      border-top: 1px solid #333;
+    }
